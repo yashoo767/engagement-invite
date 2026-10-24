@@ -115,7 +115,7 @@ export default function Countdown() {
               Our Beautiful Day Has Arrived!
             </p>
             <p className="font-cormorant text-xl italic" style={{ color: "#F5B7B1" }}>
-              Wishing Abhay & Shivangi a lifetime of happiness ❤️
+              Wishing Abhay & Shivani a lifetime of happiness ❤️
             </p>
           </motion.div>
         ) : (
