@@ -218,7 +218,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
             className="font-great-vibes text-5xl sm:text-6xl md:text-7xl leading-tight mb-6"
             style={{ color: "#F5D78E" }}
           >
-            Shivangi
+            Shivani
           </motion.h1>
 
           {/* Engagement label */}
