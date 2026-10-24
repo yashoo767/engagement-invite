@@ -3,14 +3,14 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://abhay-shivangi.vercel.app"),
-  title: "Abhay & Shivangi | Engagement Invitation | 18 November 2026",
+  title: "Abhay & Shivani | Engagement Invitation | 18 November 2026",
   description:
-    "Join us in celebrating the engagement of Abhay Srivastava and Shivangi Srivastava on Wednesday, 18 November 2026, at Rama Resort, Sitapur.",
-  keywords: ["engagement", "Abhay Srivastava", "Shivangi Srivastava", "Rama Resort", "Sitapur"],
+    "Join us in celebrating the engagement of Abhay Srivastava and Shivani Srivastava on Wednesday, 18 November 2026, at Rama Resort, Sitapur.",
+  keywords: ["engagement", "Abhay Srivastava", "Shivani Srivastava", "Rama Resort", "Sitapur"],
   openGraph: {
-    title: "Abhay & Shivangi | Engagement Invitation",
+    title: "Abhay & Shivani | Engagement Invitation",
     description:
-      "You are cordially invited to celebrate the engagement of Abhay Srivastava & Shivangi Srivastava — 18 November 2026 at Rama Resort, Sitapur.",
+      "You are cordially invited to celebrate the engagement of Abhay Srivastava & Shivani Srivastava — 18 November 2026 at Rama Resort, Sitapur.",
     type: "website",
     locale: "en_IN",
     images: [
@@ -18,15 +18,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Abhay & Shivangi Engagement Invitation",
+        alt: "Abhay & Shivani Engagement Invitation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abhay & Shivangi | Engagement Invitation | 18 November 2026",
+    title: "Abhay & Shivani | Engagement Invitation | 18 November 2026",
     description:
-      "You are cordially invited to celebrate the engagement of Abhay Srivastava & Shivangi Srivastava.",
+      "You are cordially invited to celebrate the engagement of Abhay Srivastava & Shivani Srivastava.",
     images: ["/og-image.png"],
   },
   icons: {
