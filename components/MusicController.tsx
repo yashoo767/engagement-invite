@@ -1,0 +1,154 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+export default function MusicController() {
+  const [playing, setPlaying] = useState(false);
+  const [showLabel, setShowLabel] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Use a royalty-free instrumental from a public CDN
+  // We'll create a simple tone oscillator instead since we can't guarantee external URLs
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const gainNodeRef = useRef<GainNode | null>(null);
+  const oscillatorsRef = useRef<OscillatorNode[]>([]);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowLabel(false), 4000);
+    return () => clearTimeout(t);
+  }, []);
+
+  const startAmbientMusic = () => {
+    if (!audioCtxRef.current) {
+      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      audioCtxRef.current = ctx;
+
+      const masterGain = ctx.createGain();
+      masterGain.gain.setValueAtTime(0, ctx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 2);
+      masterGain.connect(ctx.destination);
+      gainNodeRef.current = masterGain;
+
+      // Create a gentle harmonic drone (Indian-inspired: Sa, Pa, Ma)
+      const notes = [261.63, 329.63, 392.0, 523.25]; // C4, E4, G4, C5
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const oscGain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        oscGain.gain.setValueAtTime(i === 0 ? 0.4 : 0.15, ctx.currentTime);
+        osc.connect(oscGain);
+        oscGain.connect(masterGain);
+        osc.start();
+        oscillatorsRef.current.push(osc);
+      });
+
+      // Add a subtle pulse effect
+      const pulseInterval = setInterval(() => {
+        if (!gainNodeRef.current || !audioCtxRef.current) { clearInterval(pulseInterval); return; }
+        const now = audioCtxRef.current.currentTime;
+        gainNodeRef.current.gain.setValueAtTime(0.06, now);
+        gainNodeRef.current.gain.linearRampToValueAtTime(0.04, now + 1);
+        gainNodeRef.current.gain.linearRampToValueAtTime(0.06, now + 2);
+      }, 2000);
+
+      return () => clearInterval(pulseInterval);
+    }
+  };
+
+  const toggle = () => {
+    if (!playing) {
+      startAmbientMusic();
+      if (gainNodeRef.current && audioCtxRef.current) {
+        gainNodeRef.current.gain.linearRampToValueAtTime(0.06, audioCtxRef.current.currentTime + 1);
+      }
+      if (audioCtxRef.current?.state === "suspended") {
+        audioCtxRef.current.resume();
+      }
+      setPlaying(true);
+    } else {
+      if (gainNodeRef.current && audioCtxRef.current) {
+        gainNodeRef.current.gain.linearRampToValueAtTime(0, audioCtxRef.current.currentTime + 0.5);
+        setTimeout(() => audioCtxRef.current?.suspend(), 600);
+      }
+      setPlaying(false);
+    }
+    setShowLabel(false);
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+      {/* Tooltip */}
+      <AnimatePresence>
+        {showLabel && (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="font-cinzel text-xs tracking-wider px-3 py-1.5 rounded-full"
+            style={{
+              background: "rgba(24,59,40,0.9)",
+              border: "1px solid rgba(201,154,84,0.4)",
+              color: "#F5D78E",
+            }}
+          >
+            Play Music
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Button */}
+      <motion.button
+        onClick={toggle}
+        className="relative w-12 h-12 rounded-full flex items-center justify-center cursor-pointer"
+        style={{
+          background: "linear-gradient(135deg, #183B28, #2d6048)",
+          border: "1.5px solid rgba(201,154,84,0.6)",
+          boxShadow: playing ? "0 0 20px rgba(201,154,84,0.4)" : "0 4px 15px rgba(0,0,0,0.3)",
+        }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        aria-label={playing ? "Pause music" : "Play music"}
+      >
+        {/* Rotating ring when playing */}
+        {playing && (
+          <motion.div
+            className="absolute inset-0 rounded-full border"
+            style={{ borderColor: "rgba(201,154,84,0.4)" }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          />
+        )}
+
+        {playing ? (
+          // Pause icon
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5D78E">
+            <rect x="6" y="4" width="4" height="16" rx="1" />
+            <rect x="14" y="4" width="4" height="16" rx="1" />
+          </svg>
+        ) : (
+          // Music note icon
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#C99A54">
+            <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+          </svg>
+        )}
+
+        {/* Sound waves when playing */}
+        {playing && (
+          <div className="absolute -right-8 top-1/2 -translate-y-1/2 flex items-center gap-0.5">
+            {[1, 2, 3].map((i) => (
+              <motion.div
+                key={i}
+                className="w-0.5 rounded-full"
+                style={{ background: "#C99A54" }}
+                animate={{ height: [4, 10 + i * 4, 4] }}
+                transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }}
+              />
+            ))}
+          </div>
+        )}
+      </motion.button>
+    </div>
+  );
+}
