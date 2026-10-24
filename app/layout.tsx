@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://abhay-shivangi.vercel.app"),
+  metadataBase: new URL("https://engagement-invite-smoky.vercel.app"),
   title: "Abhay & Shivani | Engagement Invitation | 18 November 2026",
   description:
     "Join us in celebrating the engagement of Abhay Srivastava and Shivani Srivastava on Wednesday, 18 November 2026, at Rama Resort, Sitapur.",
