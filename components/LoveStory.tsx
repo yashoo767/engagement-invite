@@ -154,7 +154,7 @@ export default function LoveStory() {
               <div className="h-px w-8" style={{ background: "#C99A54" }} />
             </div>
             <span className="font-great-vibes text-4xl sm:text-5xl" style={{ color: "#B76E79" }}>
-              Shivangi
+              Shivani
             </span>
           </div>
           <p className="font-cinzel text-xs tracking-[0.3em] uppercase mt-3" style={{ color: "#C99A54", opacity: 0.7 }}>
