@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function HeroInvitation() {
@@ -107,14 +108,24 @@ export default function HeroInvitation() {
           Engagement Ceremony
         </motion.h2>
 
-        {/* Couple SVG Illustration */}
+        {/* Couple Illustration */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9, duration: 1.2, ease: "easeOut" }}
           className="flex justify-center mb-10"
         >
-          <CoupleIllustration />
+          <div className="relative drop-shadow-2xl">
+            <Image
+              src="/couple.png"
+              alt="Abhay & Shivani"
+              width={340}
+              height={320}
+              priority
+              className="object-contain"
+              style={{ maxWidth: "min(340px, 85vw)", height: "auto" }}
+            />
+          </div>
         </motion.div>
 
         {/* Groom name */}
@@ -151,7 +162,7 @@ export default function HeroInvitation() {
           className="font-great-vibes text-6xl sm:text-7xl md:text-8xl leading-none mb-8"
           style={{ color: "#F5D78E" }}
         >
-          Shivangi Srivastava
+          Shivani Srivastava
         </motion.h1>
 
         {/* Tagline */}
@@ -278,7 +289,8 @@ function HangingLantern({ left, delay }: { left: string; delay: number }) {
   );
 }
 
-function CoupleIllustration() {
+// SVG illustration removed — replaced with real couple image
+function _noop() {
   return (
     <div className="relative inline-block">
       <svg width="280" height="320" viewBox="0 0 280 320" fill="none" className="drop-shadow-2xl">
