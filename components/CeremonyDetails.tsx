@@ -12,9 +12,9 @@ export default function CeremonyDetails() {
   const calendarUrl = () => {
     const start = "20261118T000000";
     const end = "20261118T230000";
-    const title = encodeURIComponent("Abhay & Shivangi Engagement Ceremony");
+    const title = encodeURIComponent("Abhay & Shivani Engagement Ceremony");
     const location = encodeURIComponent("Rama Resort, Tedwa Chilaula SH-21, Sitapur - Lakhimpur Rd, Sitapur, Uttar Pradesh 261001");
-    const details = encodeURIComponent("You are cordially invited to the engagement ceremony of Abhay Srivastava & Shivangi Srivastava.");
+    const details = encodeURIComponent("You are cordially invited to the engagement ceremony of Abhay Srivastava & Shivani Srivastava.");
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&location=${location}&details=${details}`;
   };
 
@@ -99,7 +99,7 @@ export default function CeremonyDetails() {
               <span className="font-cormorant text-xl italic" style={{ color: "#B76E79" }}>&amp;</span>
               <div className="h-px w-12" style={{ background: "linear-gradient(90deg, #B76E79, transparent)" }} />
             </div>
-            <p className="font-great-vibes text-4xl sm:text-5xl" style={{ color: "#B76E79" }}>Shivangi Srivastava</p>
+            <p className="font-great-vibes text-4xl sm:text-5xl" style={{ color: "#B76E79" }}>Shivani Srivastava</p>
           </div>
 
           {/* Divider */}
