@@ -8,7 +8,7 @@ export default function Footer() {
 
   const shareWhatsApp = () => {
     const text = encodeURIComponent(
-      "You're invited! 💍\n\nAbhay Srivastava & Shivangi Srivastava's Engagement Ceremony\n📅 Wednesday, 18 November 2026\n📍 Rama Resort, Sitapur, Uttar Pradesh\n\nWe would love to have you celebrate with us! ❤️"
+      "You're invited! 💍\n\nAbhay Srivastava & Shivani Srivastava's Engagement Ceremony\n📅 Wednesday, 18 November 2026\n📍 Rama Resort, Sitapur, Uttar Pradesh\n\nWe would love to have you celebrate with us! ❤️"
     );
     window.open(`https://wa.me/?text=${text}`, "_blank");
   };
@@ -63,7 +63,7 @@ export default function Footer() {
           className="font-great-vibes text-5xl sm:text-6xl mb-3"
           style={{ color: "#F5D78E" }}
         >
-          Abhay & Shivangi
+          Abhay & Shivani
         </motion.h2>
 
         <motion.p
@@ -174,7 +174,7 @@ export default function Footer() {
           Two Hearts, One Beautiful Journey
         </p>
         <p className="font-inter text-xs" style={{ color: "rgba(201,154,84,0.25)" }}>
-          Made with ❤️ for Abhay & Shivangi
+          Made with ❤️ for Abhay & Shivani
         </p>
       </div>
     </footer>
